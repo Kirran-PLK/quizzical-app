@@ -1,11 +1,13 @@
-
+import Intro from "./components/Intro"
 
 function App() {
 
-  return (
-    <>
-      <h2>Hello</h2>
-    </>
+  return (  
+      <main className="main">
+        <img src="./src/images/blobYellow.png" className="blobYellow"/>
+        <img src="./src/images/blobBlue.png" className="blobBlue"/>
+        <Intro/>
+      </main>
   )
 }
 
