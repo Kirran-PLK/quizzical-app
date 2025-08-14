@@ -4,8 +4,8 @@ export default function Question(props){
     function options(){
         const allOptionsElements = props.mcq.allAnswers.map(answer => {
             return (
-                <div key={answer}>
-                    <input type="radio" id={answer} name={props.question} value={answer} />
+                <div key={answer} className="options">
+                    <input type="radio" id={answer} name={props.mcq.question} value={answer} />
                     <label htmlFor={answer}>{answer}</label>
                 </div>
             )
@@ -14,8 +14,8 @@ export default function Question(props){
     }
     return(
         <>
-            <h2>{props.mcq.question}</h2>
-            <div>
+            <h2 className="question">{props.mcq.question}</h2>
+            <div className="options-wrapper">
               {options()}
             </div>
         </>
