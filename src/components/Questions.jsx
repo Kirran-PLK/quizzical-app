@@ -36,12 +36,17 @@ export default function Questions() {
   }
 
   return (
-    <section className="questions-section">
-      <form>
-        <div className="question-answer-section">
-          {questionsArray!=null && MCQs()}
-        </div>
-      </form>
-    </section>
+    <>
+      {questionsArray != null && (
+        <section className="questions-section">
+          <form>
+            <div className="question-answer-section">
+              {MCQs()}
+              <button type="submit">Check answers</button>
+            </div>
+          </form>
+        </section>
+      )}
+    </>
   );
 }

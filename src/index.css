@@ -71,6 +71,7 @@ body {
 .question-answer-section{
   border: 0px solid black;
   margin: 2em 4.6875em;
+  font-family: "Inter", sans-serif;
 }
 
 .question{
@@ -103,7 +104,6 @@ body {
 
 .options label{
   text-align: center;
-  font-family: "Inter", sans-serif;
   margin: 0.5em 1em;
   font-size: 0.625em;
   display: flex;
@@ -111,4 +111,14 @@ body {
   flex-wrap: nowrap;
 }
 
-
+.question-answer-section button{
+  display: block;
+  margin: 2em auto;
+  padding: 1.2em 2.2em;
+  border-radius: 0.625em;
+  border: none;
+  color: #F5F7FB;
+  background-color: #4D5B9E;
+  font-size: 0.6rem;
+  font-weight: 400;
+}
