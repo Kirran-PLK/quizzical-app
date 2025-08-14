@@ -15,24 +15,31 @@ export default function Questions() {
       const fetchedData = data.results
       const modifyData = fetchedData.map(el => {
         const allAnswers = [...el.incorrect_answers, el.correct_answer];
-        const shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
+        const shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5).map(sA=>he.decode(sA));
         return {
           question : he.decode(el.question),
           allAnswers : shuffledAnswers,
-          correctAnswer : el.correct_answer,
-          incorrectAnswers : el.incorrect_answers
+          correctAnswer : he.decode(el.correct_answer),
+          incorrectAnswers : el.incorrect_answers.map(iC=>he.decode(iC))
         }
       })
       setQuestionsArray(modifyData);
     });
     fetched.current = true;
   },[]);
+
   if(questionsArray!=null) console.log(questionsArray);
+
+  function MCQs(){
+    const mcqElements = questionsArray.map(q => <Question key={q.correctAnswer} mcq={q} />)
+    return mcqElements;
+  }
+
   return (
     <section className="questions-section">
       <form>
         <div className="question-answer-section">
-          <Question/>
+          {questionsArray!=null && MCQs()}
         </div>
       </form>
     </section>
