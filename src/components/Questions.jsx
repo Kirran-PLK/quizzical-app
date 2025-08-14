@@ -1,34 +1,38 @@
+import Question from "./Question";
+import { useEffect, useRef ,useState } from "react";
+import he from "he";
+
 export default function Questions() {
+  
+  const [questionsArray, setQuestionsArray] = useState(null);
+  const fetched = useRef(false);
+
+  useEffect(()=>{
+    if(fetched.current) return;
+    fetch("https://opentdb.com/api.php?amount=5&type=multiple")
+    .then(response => response.json())
+    .then(data => {
+      const fetchedData = data.results
+      const modifyData = fetchedData.map(el => {
+        const allAnswers = [...el.incorrect_answers, el.correct_answer];
+        const shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
+        return {
+          question : he.decode(el.question),
+          allAnswers : shuffledAnswers,
+          correctAnswer : el.correct_answer,
+          incorrectAnswers : el.incorrect_answers
+        }
+      })
+      setQuestionsArray(modifyData);
+    });
+    fetched.current = true;
+  },[]);
+  if(questionsArray!=null) console.log(questionsArray);
   return (
     <section className="questions-section">
       <form>
         <div className="question-answer-section">
-          <label>
-            How would one say goodbye in Spanish?
-            <div>
-              <div>
-                <input type="radio" id="Adiós" name="Adiós" value="Adiós" />
-                <label for="Adiós">Adiós</label>
-              </div>
-              <div>
-                <input type="radio" id="Hola" name="Hola" value="Hola" />
-                <label for="Hola">Hola</label>
-              </div>
-              <div>
-                <input
-                  type="radio"
-                  id="Au Revoir"
-                  name="Au Revoir"
-                  value="Au Revoir"
-                />
-                <label for="Au Revoir">Au Revoir</label>
-              </div>
-              <div>
-                <input type="radio" id="Salir" name="Salir" value="Salir" />
-                <label for="Salir">Salir</label>
-              </div>
-            </div>
-          </label>
+          <Question/>
         </div>
       </form>
     </section>
