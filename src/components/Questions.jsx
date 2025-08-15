@@ -7,13 +7,12 @@ export default function Questions() {
   const [isFormSuccess, setisFormSuccess] = useState(false);
   const fetched = useRef(false);
 
-  useEffect(() => {
-    if (fetched.current) return;
+  function fetchQuestions() {
+    fetched.current = true;
     fetch("https://opentdb.com/api.php?amount=5&type=multiple")
-      .then((response) => response.json())
+      .then((res) => res.json())
       .then((data) => {
-        const fetchedData = data.results;
-        const modifyData = fetchedData.map((el) => {
+        const modifyData = data.results.map((el) => {
           const allAnswers = [...el.incorrect_answers, el.correct_answer];
           const shuffledAnswers = allAnswers
             .sort(() => Math.random() - 0.5)
@@ -30,8 +29,16 @@ export default function Questions() {
         });
         setQuestionsArray(modifyData);
       });
-    fetched.current = true;
+  }
+
+  useEffect(() => {
+    fetchQuestions();
   }, []);
+
+  function playAgain() {
+    fetchQuestions();
+    setisFormSuccess(false);
+  }
 
   function MCQs() {
     const mcqElements = questionsArray.map((q) => (
@@ -117,7 +124,9 @@ export default function Questions() {
               <p className="result">
                 You scored {getCorrectAnswersCount()}/5 correct answers
               </p>
-              <button className="play-again-btn"> Play again </button>
+              <button className="play-again-btn" onClick={playAgain}>
+                Play again
+              </button>
             </div>
           )}
         </section>
