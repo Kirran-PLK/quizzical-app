@@ -68,7 +68,6 @@ body {
 
 /* MCQ section */
 .question-answer-section {
-  border: 0px solid black;
   margin: 2em 4.6875em;
   font-family: "Inter", sans-serif;
 }
@@ -125,16 +124,39 @@ body {
   flex-wrap: nowrap;
 }
 
+.play-again-btn,
 .question-answer-section button {
   display: block;
   margin: 2em auto;
-  padding: 1.2em 2.2em;
+  padding: 1em 2.5em;
   border-radius: 0.625em;
   border: none;
   color: #f5f7fb;
   background-color: #4d5b9e;
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   font-weight: 400;
+}
+
+.result-div {
+  display: flex;
+  border: 0px solid black;
+  justify-content: center;
+  gap: 1.2em;
+  margin: 0 0 2em;
+}
+
+.result {
+  font-weight: bold;
+  align-self: center;
+}
+
+.play-again-btn,
+.result {
+  margin: 0;
+}
+
+.play-again-btn {
+  padding: 0.8em 2.5em;
 }
 
 /* options colors */

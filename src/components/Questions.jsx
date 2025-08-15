@@ -4,6 +4,7 @@ import he from "he";
 
 export default function Questions() {
   const [questionsArray, setQuestionsArray] = useState(null);
+  const [isFormSuccess, setisFormSuccess] = useState(false);
   const fetched = useRef(false);
 
   useEffect(() => {
@@ -83,6 +84,7 @@ export default function Questions() {
         );
       }, 50); // 50ms is usually enough for browser to register removal
     } else {
+      setisFormSuccess(true);
       setQuestionsArray((prev) =>
         prev.map((obj) => ({
           ...obj,
@@ -92,6 +94,14 @@ export default function Questions() {
     }
   }
 
+  function getCorrectAnswersCount() {
+    let count = 0;
+    questionsArray.forEach((obj) => {
+      if (obj.isCorrect) count++;
+    });
+    return count;
+  }
+
   return (
     <>
       {questionsArray != null && (
@@ -99,9 +109,17 @@ export default function Questions() {
           <form action={mcqSubmit}>
             <div className="question-answer-section">
               {MCQs()}
-              <button type="submit">Check answers</button>
+              {!isFormSuccess && <button type="submit">Check answers</button>}
             </div>
           </form>
+          {isFormSuccess && (
+            <div className="result-div">
+              <p className="result">
+                You scored {getCorrectAnswersCount()}/5 correct answers
+              </p>
+              <button className="play-again-btn"> Play again </button>
+            </div>
+          )}
         </section>
       )}
     </>
