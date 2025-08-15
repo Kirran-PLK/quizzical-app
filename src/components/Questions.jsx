@@ -60,13 +60,25 @@ export default function Questions() {
  function mcqSubmit(formData) {
   const formEntries = Object.fromEntries(formData.entries());
 
+  // Step 1: temporarily remove blink by setting null
   setQuestionsArray(prev =>
     prev.map(obj => ({
       ...obj,
-      isSelected: (obj.SelectedAnswer ? true : false) || formEntries[obj.question] != null
+      isSelected: obj.SelectedAnswer || formEntries[obj.question] != null ? true : null
     }))
   );
+
+  // Step 2: after a tiny delay, set unanswered back to false
+  setTimeout(() => {
+    setQuestionsArray(prev =>
+      prev.map(obj => ({
+        ...obj,
+        isSelected: obj.isSelected === null ? false : obj.isSelected
+      }))
+    );
+  }, 50); // 50ms is usually enough for browser to register removal
 }
+
 
 
   return (

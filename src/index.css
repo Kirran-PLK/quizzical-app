@@ -97,7 +97,7 @@ body {
 */
 
 .blink-red {
-  animation: blinkRed 0.5s step-start 2; /* blink 4 times */
+  animation: blinkRed 0.5s step-start 1; /* blink 4 times */
 }
 
 @keyframes blinkRed {

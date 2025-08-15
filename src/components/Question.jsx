@@ -12,27 +12,26 @@ export default function Question(props){
         
     }
 
-    function options() {
-      return props.mcq.allAnswers.map(answer => {
-        const className = getClassName(answer);
-        const blinkKeySuffix = props.mcq.isSelected === false ? `-blink-${Date.now()}` : '';
-
-        return (
-          <div key={answer + blinkKeySuffix} className={className}>
-            <input
-              onChange={props.onSelect}
-              type="radio"
-              id={answer}
-              name={props.mcq.question}
-              value={answer}
-              checked={props.mcq.SelectedAnswer === answer}
-            />
-            <label htmlFor={answer}>{answer}</label>
-          </div>
-        );
-      });
+    function options(){
+        const allOptionsElements = props.mcq.allAnswers.map(answer => {
+            return (
+                <div key={answer}>
+                  <div  className={getClassName(answer)}>
+                    <input
+                        onChange={props.onSelect}
+                        type="radio"
+                        id={answer}
+                        name={props.mcq.question}
+                        value={answer}
+                        checked={props.mcq.SelectedAnswer === answer}
+                    />
+                    <label htmlFor={answer} >{answer}</label>
+                  </div>
+                </div>      
+            )
+        })
+        return allOptionsElements;
     }
-
     return(
         <>
             <h2 className="question">{props.mcq.question}</h2>
