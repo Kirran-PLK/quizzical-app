@@ -1,12 +1,26 @@
-
+import { useState } from "react";
 
 export default function Question(props){
+    const [selectedAnswer, setSelectedAnswer] = useState("");
+
+    function onSelection(e){
+        setSelectedAnswer(e.target.value);
+        console.log(e.target.value)
+    }
+
     function options(){
         const allOptionsElements = props.mcq.allAnswers.map(answer => {
             return (
-                <div key={answer} className="options">
-                    <input type="radio" id={answer} name={props.mcq.question} value={answer} />
-                    <label htmlFor={answer}>{answer}</label>
+                <div key={answer} className={selectedAnswer === answer ? "options selected" : "options" }>
+                    <input
+                        onChange={onSelection}
+                        type="radio"
+                        id={answer}
+                        name={props.mcq.question}
+                        value={answer}
+                        checked={selectedAnswer === answer}
+                    />
+                    <label htmlFor={answer} >{answer}</label>
                 </div>
             )
         })

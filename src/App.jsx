@@ -7,7 +7,6 @@ function App() {
 
   function startQuiz() {
     setIsDisplayIntro((prev) => !prev);
-    console.log(isDisplayInro);
   }
   return (
     <main className="main">

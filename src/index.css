@@ -122,3 +122,8 @@ body {
   font-size: 0.6rem;
   font-weight: 400;
 }
+
+/* options colors */
+.selected {
+  background-color: #D6DBF5;
+}

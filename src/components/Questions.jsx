@@ -20,7 +20,8 @@ export default function Questions() {
           question : he.decode(el.question),
           allAnswers : shuffledAnswers,
           correctAnswer : he.decode(el.correct_answer),
-          incorrectAnswers : el.incorrect_answers.map(iC=>he.decode(iC))
+          incorrectAnswers : el.incorrect_answers.map(iC=>he.decode(iC)),
+          isCorrect : null
         }
       })
       setQuestionsArray(modifyData);
@@ -28,18 +29,22 @@ export default function Questions() {
     fetched.current = true;
   },[]);
 
-  if(questionsArray!=null) console.log(questionsArray);
-
   function MCQs(){
     const mcqElements = questionsArray.map(q => <Question key={q.correctAnswer} mcq={q} />)
     return mcqElements;
+  }
+
+  function mcqSubmit(formData){
+    const formEntries = Object.fromEntries(formData.entries());
+    console.log(questionsArray);
+    console.log(formEntries);
   }
 
   return (
     <>
       {questionsArray != null && (
         <section className="questions-section">
-          <form>
+          <form action={mcqSubmit}>
             <div className="question-answer-section">
               {MCQs()}
               <button type="submit">Check answers</button>
