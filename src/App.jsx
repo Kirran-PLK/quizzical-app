@@ -10,8 +10,8 @@ function App() {
   }
   return (
     <main className="main">
-      <img src="./src/images/blobYellow.png" className="blobYellow" />
-      <img src="./src/images/blobBlue.png" className="blobBlue" />
+      <img src="/src/images/blobYellow.png" className="blobYellow" />
+      <img src="/src/images/blobBlue.png" className="blobBlue" />
       {isDisplayInro ? <Intro startQuiz={startQuiz} /> : <Questions />}
     </main>
   );
