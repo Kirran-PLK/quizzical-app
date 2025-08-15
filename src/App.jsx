@@ -1,4 +1,6 @@
 import Intro from "./components/Intro";
+import blobYellow from "/src/images/blob-yellow.png";
+import blobBlue from "/src/images/blob-blue.png";
 import Questions from "./components/Questions";
 import { useState } from "react";
 
@@ -10,8 +12,8 @@ function App() {
   }
   return (
     <main className="main">
-      <img src="/src/images/blob-yellow.png" className="blobYellow" />
-      <img src="/src/images/blob-blue.png" className="blobBlue" />
+      <img src={blobYellow} className="blobYellow" />
+      <img src={blobBlue} className="blobBlue" />
       {isDisplayInro ? <Intro startQuiz={startQuiz} /> : <Questions />}
     </main>
   );
