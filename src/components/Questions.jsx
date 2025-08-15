@@ -33,7 +33,6 @@ export default function Questions() {
 
   function MCQs(){
     const mcqElements = questionsArray.map(q => <Question key={q.correctAnswer} mcq={q} onSelect={onOptionSelection} />)
-    console.log(questionsArray)
     return mcqElements;
   }
 
