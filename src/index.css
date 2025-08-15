@@ -70,6 +70,7 @@ body {
 .question-answer-section {
   margin: 2em 4.6875em;
   font-family: "Inter", sans-serif;
+  width: 80vw;
 }
 
 .question {
