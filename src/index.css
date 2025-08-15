@@ -210,6 +210,17 @@ body {
   }
 }
 
+@media (max-width: 450px) {
+  .result-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .play-again-btn {
+    width: 50vw;
+  }
+}
+
 /* options colors */
 .selected {
   background-color: #d6dbf5;
