@@ -21,7 +21,9 @@ export default function Questions() {
           allAnswers : shuffledAnswers,
           correctAnswer : he.decode(el.correct_answer),
           incorrectAnswers : el.incorrect_answers.map(iC=>he.decode(iC)),
-          isCorrect : null
+          isCorrect : null,
+          isSelected : null,
+          SelectedAnswer : false
         }
       })
       setQuestionsArray(modifyData);
@@ -30,15 +32,42 @@ export default function Questions() {
   },[]);
 
   function MCQs(){
-    const mcqElements = questionsArray.map(q => <Question key={q.correctAnswer} mcq={q} />)
+    const mcqElements = questionsArray.map(q => <Question key={q.correctAnswer} mcq={q} onSelect={onOptionSelection} />)
+    console.log(questionsArray)
     return mcqElements;
   }
 
-  function mcqSubmit(formData){
-    const formEntries = Object.fromEntries(formData.entries());
-    console.log(questionsArray);
-    console.log(formEntries);
+  function onOptionSelection(e){
+    const answer = e.target.value
+    setQuestionsArray(prev => {
+      const newArray = [];
+      prev.forEach(obj=>{
+        if(obj.allAnswers.includes(answer)){
+          newArray.push({
+            ...obj,
+            SelectedAnswer : answer
+          })
+        }else{
+          newArray.push({
+            ...obj
+          })
+        }
+      })
+      return newArray;
+    })
   }
+
+ function mcqSubmit(formData) {
+  const formEntries = Object.fromEntries(formData.entries());
+
+  setQuestionsArray(prev =>
+    prev.map(obj => ({
+      ...obj,
+      isSelected: (obj.SelectedAnswer ? true : false) || formEntries[obj.question] != null
+    }))
+  );
+}
+
 
   return (
     <>

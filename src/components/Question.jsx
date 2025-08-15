@@ -1,27 +1,33 @@
-import { useState } from "react";
+
 
 export default function Question(props){
-    const [selectedAnswer, setSelectedAnswer] = useState("");
-
-    function onSelection(e){
-        setSelectedAnswer(e.target.value);
-        console.log(e.target.value)
+    function getClassName(answer) {
+        if (props.mcq.SelectedAnswer!=false && props.mcq.SelectedAnswer === answer) {
+          return "options selected";
+        }
+        if(props.mcq.isSelected===false) {
+          return "options blink-red";
+        }
+        if (props.mcq.isSelected === null || props.mcq.isSelected!=null) return "options";
+        
     }
 
     function options(){
         const allOptionsElements = props.mcq.allAnswers.map(answer => {
             return (
-                <div key={answer} className={selectedAnswer === answer ? "options selected" : "options" }>
+                <div key={answer}>
+                  <div  className={getClassName(answer)}>
                     <input
-                        onChange={onSelection}
+                        onChange={props.onSelect}
                         type="radio"
                         id={answer}
                         name={props.mcq.question}
                         value={answer}
-                        checked={selectedAnswer === answer}
+                        checked={props.mcq.SelectedAnswer === answer}
                     />
                     <label htmlFor={answer} >{answer}</label>
-                </div>
+                  </div>
+                </div>      
             )
         })
         return allOptionsElements;
@@ -30,8 +36,9 @@ export default function Question(props){
         <>
             <h2 className="question">{props.mcq.question}</h2>
             <div className="options-wrapper">
-              {options()}
-            </div>
+              {options()}      
+            {/* <p className="missing-option-error">a option must be selected</p> */}
+            </div>        
         </>
     )
 }

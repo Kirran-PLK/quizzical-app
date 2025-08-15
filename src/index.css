@@ -89,6 +89,27 @@ body {
   margin: 0.9em 0;
   padding: 0 0 0.959375em;
 }
+/*
+.missing-option-error{
+  margin: 0 auto;
+  position: absolute;
+}
+*/
+
+.blink-red {
+  animation: blinkRed 0.5s step-start 2; /* blink 4 times */
+}
+
+@keyframes blinkRed {
+  50% {
+    border-color: red;
+    background-color: rgba(255, 0, 0, 0.1);
+  }
+  100% {
+    border-color: #293264;
+    background-color: transparent;
+  }
+}
 
 .options{
   border: 1px solid #293264;
