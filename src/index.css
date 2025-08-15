@@ -39,7 +39,6 @@ body {
 /* Intro Style */
 
 .intro-section {
-  border: 0px solid black;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -47,6 +46,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100vw;
 }
 
 .intro-section h1 {
